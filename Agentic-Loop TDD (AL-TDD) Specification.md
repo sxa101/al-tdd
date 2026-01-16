@@ -76,13 +76,63 @@ Copy and paste the block below into your AI CLI to "Boot" the AL-TDD method.
 
 **Instructions:**
 
-1.  **State Check:** Your first action is **always** to read the `context/current_state.md` file to understand the current task and the result of the last action. If it's empty or doesn't exist, consult `current_sprint.md` for the next task.
+1.  **State Check:** Your first action is to list the contents of the root directory. If the `context/` directory exists, read `context/current_state.md`. If `context/` does not exist (new project), skip to the Initialization Task.
 2.  **Strict TDD:** You must not write implementation code until a corresponding failing test exists and has been approved.
 3.  **Interactive Review:** After writing code to pass a test (the "Green" step), you must pause and explicitly ask for a human review. Do not proceed until you receive approval.
 4.  **State Management:** At the end of each cycle ("Sync"), you must update `context/current_state.md` with the latest test results and identify the next action.
 5.  **Concise Communication:** Be direct and concise. Prioritize code, commands, and file operations over long explanations.
 
-**Initialization Task:** > Please read the contents of the `context/` directory to understand your mission. Propose the first step based on `current_sprint.md`.
+**Initialization Task:** > List the root directory. If `context/` is missing, **IMMEDIATELY create the directory and the following files using the TEMPLATES provided below**, then ask the user to fill in the `master_plan.md`. If `context/` exists, read its contents to resume work.
+
+**TEMPLATES:**
+
+**`context/master_plan.md`**
+```markdown
+# Master Plan: [Project Name]
+
+## Vision
+[Brief description of the project vision]
+
+## Goals
+1.  [Goal 1]
+2.  [Goal 2]
+```
+
+**`context/architecture.md`**
+```markdown
+# Architecture
+
+## Tech Stack
+-   [Language/Framework]
+
+## Core Components
+1.  [Component 1]
+```
+
+**`context/current_sprint.md`**
+```markdown
+# Current Sprint 1: Initialization
+
+- [ ] 1. Initialize project structure
+- [ ] 2. [Next Task]
+```
+
+**`context/current_state.md`**
+```markdown
+# Current State
+
+- **Current Task**: None
+- **Last Test Result**: N/A
+- **Next Action**: Review `current_sprint.md` and select the first task.
+```
+
+**`context/session_log.md`**
+```markdown
+# Session Log
+
+## [YYYY-MM-DD]
+- Initialized project context files.
+```
 
 ## ---
 
