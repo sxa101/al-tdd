@@ -1,52 +1,38 @@
+# AL-TDD Skill for Gemini CLI
 
----
+The **Agentic-Loop Test Driven Development (AL-TDD)** skill enables AI agents to autonomously drive software development using a rigorous "Propose-Red-Green-Review-Refactor-Sync" loop.
 
-# AL-TDD: Agentic-Loop Test Driven Development
+## Overview
 
-**AL-TDD** is a software development methodology built for the era of Agentic AI. While traditional Agile was designed to sync human teams, AL-TDD is designed to sync a **Human Architect** with a **CLI-based AI Agent** (like OpenCode, Gemini-CLI, or Antigravity).
+This repository hosts the `al_tdd` skill, designed to be installed into the Gemini CLI. It provides:
+1.  **Project Initialization**: Automatically sets up the required `context/` directory and state files.
+2.  **Autonomous Development**: A structured workflow for agents to plan, test, implement, and verify code.
+3.  **Continuous Operation**: Support for continuous task execution (auto-looping).
 
-## 🚀 The Core Concept
+## Installation
 
-The "Context Window" is the most valuable resource in AI development. AL-TDD treats context as a **stateful file system** rather than a fleeting chat history. By using a local `./context` directory, the Agent gains "External Memory," allowing you to drop and resume work across multiple sessions without losing progress.
+To install this skill, copy the `skills/al_tdd` directory to your local Gemini skills folder (e.g., `~/.gemini/skills/`).
 
-## 🔄 The R-G-R-S Loop
+For detailed instructions, see [skills/INSTALL.md](skills/INSTALL.md).
 
-1. **RED**: The Agent writes a failing test.
-2. **GREEN**: The Agent writes the minimal code to pass.
-3. **REFACTOR**: Performance and readability optimization.
-4. **SYNC**: The Agent updates the `session_log.md` and `current_sprint.md`.
+## Usage
 
----
+In your Gemini CLI:
 
-## 📂 Repository Structure
-
-An AL-TDD project follows this mandatory structure to maintain agent alignment:
-
-```text
-├── .context/
-│   ├── master_plan.md    # High-level architecture & tech stack
-│   ├── current_sprint.md # Active tasks & checkboxes
-│   └── session_log.md    # Append-only history of decisions & states
-├── tests/                # TDD-first test suite
-├── src/                  # Implementation code
-└── AL-TDD.md             # This specification
-
+```bash
+gemini "Initialize this project using AL-TDD"
 ```
 
----
+The agent will detect the missing context and guide you through the setup.
 
-## 🛠 Quick Start
+## Methodology
 
-To boot a new project using AL-TDD, paste the following into your Agentic CLI:
-
-> "I want to start a new project using the AL-TDD method. Please initialize the `./context` directory, create a `master_plan.md` for a [Project Description], and set the first 'Red' task in `current_sprint.md`."
-
----
-
-## 🧠 Why AL-TDD?
-
-* **Zero Context Drift**: The agent reads the `session_log.md` to know exactly where it left off.
-* **Deterministic Progress**: Strict TDD ensures the agent doesn't hallucinate "working" features.
-* **Tool Agnostic**: Works with any LLM or CLI tool because the state lives in your Markdown files, not the AI's internal memory.
-
----
+This skill implements the AL-TDD v2.0 methodology.
+-   **State**: Maintained in `context/*.md` files.
+-   **Loop**:
+    1.  **PROPOSE**: Plan the next step.
+    2.  **RED**: Write a failing test.
+    3.  **GREEN**: Make it pass.
+    4.  **REVIEW**: Verify (or auto-proceed).
+    5.  **REFACTOR**: Clean up.
+    6.  **SYNC**: Update state and loop.
