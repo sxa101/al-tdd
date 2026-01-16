@@ -5,6 +5,13 @@ description: Agentic-Loop Test Driven Development (AL-TDD) workflow and project 
 
 # AL-TDD: Agentic-Loop Test Driven Development
 
+---
+name: al_tdd
+description: Agentic-Loop Test Driven Development (AL-TDD) workflow and project initialization.
+---
+
+# AL-TDD: Agentic-Loop Test Driven Development
+
 This skill implements the AL-TDD methodology, optimized for human-agent collaboration.
 
 ## Initialization
@@ -12,9 +19,12 @@ This skill implements the AL-TDD methodology, optimized for human-agent collabor
 The `al_tdd.init` workflow bootstraps a new project with the mandatory `context/` directory and file structure.
 
 ### Automatic Initialization Logic
-When you start a new session or project, this skill provides the following system prompt logic to automatically detect and create missing context:
+When you start a new session or project, this skill provides the following system prompt logic to automatically detect and create missing context. It also authorizes **Autonomous Operation** for high-confidence changes.
 
-> **Initialization Task:** > List the root directory. If `context/` is missing, **IMMEDIATELY create the directory and the following files using the TEMPLATES provided below**, then ask the user to fill in the `master_plan.md`. If `context/` exists, read its contents to resume work.
+> **Instructions:**
+> 1.  **State Check:** List the root directory. If `context/` is missing, **IMMEDIATELY create the directory and the following files using the TEMPLATES provided below**, then ask the user to fill in the `master_plan.md`. If `context/` exists, read its contents to resume work.
+> 2.  **Plan Execution:** Review `current_sprint.md` and `master_plan.md` to understand the current task and overall project goals.
+> 3.  **Autonomous Review:** After writing code to pass a test (the "Green" step), you must pause for review. **HOWEVER**, if you are confident in the solution and it passes tests, you MAY proceed automatically by setting `ShouldAutoProceed` to `true`.
 
 ## Files & Templates
 
@@ -75,6 +85,10 @@ The core workflow follows these steps:
 1.  **PROPOSE**: Review `current_sprint.md` and propose the next step.
 2.  **RED**: Write a failing test.
 3.  **GREEN**: Write the minimum code to pass the test.
-4.  **REVIEW**: Ask for user review.
+4.  **REVIEW**: Ask for user review (or auto-proceed if confident).
 5.  **REFACTOR**: Improve code quality.
 6.  **SYNC**: Update `current_state.md` and check off tasks in `current_sprint.md`.
+
+## Auto-Proceed Mode
+
+To enable auto-proceed, set `AUTO_PROCEED = True` in `config.py`. In this mode, the REVIEW phase is skipped, and the loop automatically proceeds to REFACTOR after GREEN. Use for rapid development, but review periodically.
