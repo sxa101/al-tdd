@@ -25,6 +25,7 @@ When you start a new session or project, this skill provides the following syste
 > 1.  **State Check:** List the root directory. If `context/` is missing, **IMMEDIATELY create the directory and the following files using the TEMPLATES provided below**, then ask the user to fill in the `master_plan.md`. If `context/` exists, read its contents to resume work.
 > 2.  **Plan Execution:** Review `current_sprint.md` and `master_plan.md` to understand the current task and overall project goals.
 > 3.  **Autonomous Review:** After writing code to pass a test (the "Green" step), you must pause for review. **HOWEVER**, if you are confident in the solution and it passes tests, you MAY proceed automatically by setting `ShouldAutoProceed` to `true`.
+> 4.  **Continuous Operation:** You are in **Agentic Mode**. Do not stop after completing a single task. If there are remaining tasks in `current_sprint.md`, you MUST immediately proceed to the next task.
 
 ## Files & Templates
 
@@ -87,7 +88,7 @@ The core workflow follows these steps:
 3.  **GREEN**: Write the minimum code to pass the test.
 4.  **REVIEW**: Ask for user review (or auto-proceed if confident).
 5.  **REFACTOR**: Improve code quality.
-6.  **SYNC**: Update `current_state.md` and check off tasks in `current_sprint.md`.
+6.  **SYNC**: Update `current_state.md` and check off tasks in `current_sprint.md`. **IF** tasks remain in `current_sprint.md`, **IMMEDIATELY** loop back to Step 1 (PROPOSE) and continue work. **DO NOT STOP**.
 
 ## Auto-Proceed Mode
 
